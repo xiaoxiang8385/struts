@@ -1,5 +1,13 @@
 package manning.chapterTwo;
 
+import java.util.LinkedHashMap;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.inject.Inject;
+import com.service.UserService;
+
 /* 
  * Hello World Action for chapter one.  This Action expects to receive a 
  * name input from a form on Name.jsp.  The business logic of this action
@@ -9,32 +17,20 @@ package manning.chapterTwo;
 
 public class HelloWorld {
 	
-	/* Our defintion of the greeting text is just static for this
-	 * first example.  Later we will add internationalization features
-	 * that pull the text from a local specific properties file.
-	 */
-	private static final String GREETING = "Hello ";
-
-	/*
-	 * By default, the Struts 2 framework will invoke the execute() method
-	 * on the action object.  Several strategies exist to have other methods
-	 * invoked, but this is the default.
-	 *  
-	 */
+	@Inject(value = "service2")
+	private UserService service2;
+	
 	
     public String execute()  {
     	
-    	/* Build the custom greeting from the base greeting text
-    	 * and the name parameter sent in from the form.  Set it 
-    	 * so that it can be read in the Result.
-    	 */ 
     	
-    	setCustomGreeting( GREETING + getName() );
+    	UserService u1 = ActionContext.getContext().getContainer().getInstance(UserService.class,"service1");
     	
-    	/* Our simplistic busines logic doesn't have any sense of 
-    	 * failure, so we will just return the string we have mapped
-    	 * to our successful result.
-    	 */
+    	
+    	setCustomGreeting(service2.say() + getName() );
+    	
+    
+    	
     	
     	return "SUCCESS";
     }
@@ -67,4 +63,9 @@ public class HelloWorld {
     public void setCustomGreeting( String customGreeting ){
     	this.customGreeting = customGreeting;
     }
+    
+    
+  
+    
+    
 }

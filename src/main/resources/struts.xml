@@ -33,6 +33,11 @@
 			</action>
 		</package>	
 		
+		<bean  type="com.service.UserService" name="service1" class="com.service.impl.UserServiceImp1" />
+ 		<bean  type="com.service.UserService" name="service2" class="com.service.impl.UserServiceImp2" />
+		
+		
+		
     <include file="manning/chapterTwo/chapterTwo.xml"/>
  
 </struts>
